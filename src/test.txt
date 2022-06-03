@@ -1,0 +1,13 @@
+
+  // const getSelectedText = (element: any) => {
+
+    // To write the selected text into the textarea
+    // const startPosition = element.current!;
+    // const endPosition = element.current!.InnerText.selectionEnd;
+    // const selectedText = element.current?.value.substring(startPosition, endPosition)
+    // selectedText.style.background = 'green'
+    // const newText = `<b>selectedText</b>`
+    // element.current?.value.replace
+    // console.log(selectedText)
+
+  // }

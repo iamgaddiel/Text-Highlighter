@@ -2,55 +2,49 @@ import { useEffect, useReducer, useRef, useState } from 'react'
 import './assets/css/base.css'
 import { Button, ButtonGroup, Container } from '@mui/material'
 import { ImportExport, UploadFile } from '@mui/icons-material'
-import { setColorReducer } from './redux/REDUCER'
+import { setColorReducer } from './redux/reducers'
+
 
 function App() {
-  const inputField = useRef<HTMLInputElement>(null)
+  // useRefs
+  const selectFileInputField = useRef<HTMLInputElement>(null)
   const colorPicker = useRef<HTMLInputElement>(null)
   const editor = useRef<HTMLDivElement>(null)
-  const [state, dispatch] = useReducer(setColorReducer, '')
+
+  // useStates
+  // const [fileContent, setFileContent] = useState('')
+  const initialColorState = ''
+
+  // useReducer
+  const [colorState, dispatch] = useReducer(setColorReducer, initialColorState)
+
 
 
   const importFile = () => {
-    inputField.current!.click()
-    inputField.current!.onchange = (e: any) => {
+    selectFileInputField.current!.click() // add click event to file input field
+    selectFileInputField.current!.onchange = (e: any) => {
       e.preventDefault()
+
       const fileReader = new FileReader()
       fileReader.onload = async (e) => {
         const text = (e.target!.result)
-        editor.current!.innerText = text!.toString()
+        editor.current!.innerText = text!.toString() // set innerText of div to text file content
       }
       fileReader.readAsText(e.target.files[0])
     }
   }
 
 
+  const getSelectedText = () => {
+    const selectedText = document.getSelection()?.toString();
+    console.log(selectedText); // log highlighted text
+  }
+
+  
   const exportAsJson = () => {
     //....
   }
 
-  const getSelectedText = (element: any) => {
-    
-
-
-    // To write the selected text into the textarea
-    // const startPosition = element.current!;
-    // const endPosition = element.current!.InnerText.selectionEnd;
-    // const selectedText = element.current?.value.substring(startPosition, endPosition)
-    // const selectedText = element.current?.value.substring(startPosition, endPosition)
-    // selectedText.style.background = 'green'
-    // const newText = `<b>selectedText</b>`
-    // element.current?.value.replace
-    console.log(selectedText)
-  }
-
-
-  useEffect(() => {
-    editor.current?.addEventListener('mouseup', () => {
-      let sel = document.getSelection()?.toString()
-      console.log(sel)
-    })
-  }, [])
 
   return (
     <>
@@ -58,7 +52,7 @@ function App() {
         <div>
           <input
             type="file"
-            ref={inputField}
+            ref={selectFileInputField}
             style={{ display: 'none' }}
             accept='.txt'
           />
@@ -75,14 +69,7 @@ function App() {
       <Container>
         <main>
           <h1 className='text-center'>Text Editor</h1>
-          <div contentEditable className='editor' ref={editor}></div>
-          {/* <textarea
-            c
-            name=""
-            id=""
-            cols={30}
-            rows={25}
-            ></textarea> */}
+          <div contentEditable className='editor' ref={editor} onMouseUp={getSelectedText}></div>
         </main>
         <input type='color' ref={colorPicker} className='color-picker' />
 

@@ -1,6 +1,4 @@
-$offWhite: #eef0f1;
-$blueColor: #3b49df;
-$whiteColor: #ffffff;
+@import 'config';
 
 body{
     margin: 0;
@@ -32,6 +30,7 @@ main{
         padding: 10px;
         font-size: 15px;
         margin: auto;
+        overflow-y: scroll;
         &:focus{
             outline: none;
         }
