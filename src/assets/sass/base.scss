@@ -1,0 +1,44 @@
+$offWhite: #eef0f1;
+$blueColor: #3b49df;
+$whiteColor: #ffffff;
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+header{
+    background: $offWhite;
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+    button{
+        margin: 0 10px !important;
+    }   
+}
+
+main{
+    h1{
+        text-align: center;
+    }
+    .editor{
+        border: 3px solid #bbb;
+        width: 70vw;
+        height: 50vh;
+        margin-top: 30px;
+        border-radius: 10px;
+        max-height: 60vh;
+        max-width: 90vw;
+        padding: 10px;
+        font-size: 15px;
+        margin: auto;
+        &:focus{
+            outline: none;
+        }
+    }
+    .color-picker{
+        width: 30vw;
+        margin: auto;
+    }
+}
+
